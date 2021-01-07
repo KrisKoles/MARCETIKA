@@ -1,0 +1,442 @@
+@import "normalize.scss";
+
+// === Mixins ==
+@mixin font-lato {
+  font-family: "Lato", sans-serif;
+}
+@mixin font-monstserrat {
+  font-family: "Montserrat", sans-serif;
+}
+// === / Mixins ===
+
+// === Variables ===
+$color-white: white;
+// === / Variables ===
+
+// === Common ===
+body {
+  @include font-lato;
+
+  color: #414141;
+}
+
+.section-inner {
+  width: 1180px;
+  margin: 0 auto;
+}
+
+.description-item {
+  &__icon {
+    margin-bottom: 20px;
+  }
+  &__title {
+    margin-bottom: 14px;
+    font-weight: bold;
+    font-size: 18px;
+    line-height: 22px;
+  }
+  &__text {
+    font-weight: 300;
+    font-size: 16px;
+    line-height: 28px;
+    color: #6c6c6c;
+  }
+}
+
+@mixin start-button {
+  @include font-monstserrat;
+
+  margin: 0;
+  padding: 16px 20px;
+  font-size: 16px;
+  outline: none;
+  border-radius: 4px;
+  color: white;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-main {
+  @include start-button;
+
+  border: none;
+  background: linear-gradient(to right, #fe985b, #fe4fa7); //градиентная кнопка
+  color:white;
+
+  &:hover {
+    background: linear-gradient(to right, #fe4fa7, #fe985b, ); //градиентная кнопка переворачивается
+  }
+}
+
+.btn-secondary {
+  @include start-button;
+
+  border: 1px solid #414141;
+  background: white;
+  color: #414141;
+}
+
+.btn-free {
+  @include start-button;
+
+  border: none;
+  background: white;
+  color: #414141;
+}
+
+// === / Common ===
+* {
+  box-sizing: border-box; //браузер вычисляет иначе, включая паддинги
+}
+
+// === header ===
+.section-header {
+  color: white;
+  background: url("../img/Bitmap.png") no-repeat 50% 50%;
+  background-size: cover;
+  position: relative;
+
+  .section-inner {
+    height: 100vh; //вытягивание по высоте окна браузера
+    position: relative;
+    z-index: 10; //поднимаем выше в пространстве
+    display: flex;
+    flex-direction: column; //вертикально
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: 5; // === ниже в пространстве
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(20, 39, 41, 0.6);
+  }
+
+  &-logo {
+    font-weight: bold;
+    font-size: 24px;
+    flex-shrink: 1; //больше всего сжимается
+    padding-top: 35px; //отступ сверху
+  }
+  &-content {
+    flex-grow: 1; //больше всего растягивается
+    display: flex;
+    align-items: center;
+  }
+  &-wrapper {
+    margin: 0 auto;
+    &_title,
+    &_subtitle {
+      text-align: center;
+    }
+
+    &_title {
+      font-weight: bold;
+      font-size: 56px;
+      line-height: 60px;
+      margin-bottom: 16px;
+    }
+    &_subtitle {
+      @include font-monstserrat;
+
+      font-size: 18px;
+      line-height: 32px;
+      width: 80%;
+      margin: 0 auto 44px;
+    }
+    &_form {
+      display: flex;
+
+      &-input {
+        flex: 1; // размещаем элементы ном растоянии
+        padding-right: 40px; // растояние между элементами
+
+        input {
+          @include font-monstserrat;
+
+          border: none;
+          background: rgba(255, 255, 255, 0.25);
+          color: white;
+          font-size: 16px;
+          margin: 0;
+          padding: 16px 20px;
+          outline: none; // убираем выделения вокруг кнопки
+          border-radius: 4px; //закругление
+          width: 100%; //растягиваем элементы на всю ширину
+          transition: .2s;
+
+          &::placeholder {
+            color: white;
+          }
+
+          &:focus {
+            background: rgba(255, 255, 255, 0.5);
+          }
+        }
+      }
+    }
+  }
+}
+// === / header ===
+
+// === promo ===
+.section-promo {
+  padding-top: 120px;
+  padding-bottom: 120px; //общие отступы для блока
+}
+
+.section-promo-1 {
+  display: flex; // располагаем горизонтально
+
+  &_content,
+  &_video {
+    flex-basis: 50%; //блоки одинаковой ширины
+  }
+
+  &_content {
+    padding-right: 95px; //отступ справа
+    .title {
+      font-weight: bold;
+      font-size: 32px;
+      line-height: 51px;
+      margin-bottom: 56px;
+    }
+
+    .description-item {
+      margin-top: 28px;
+    }
+  }
+
+  &_video {
+    width: 100%;
+    height: auto; //принудително растягиваем на всю ширину, а высота подстраивается автоматически
+  }
+}
+
+.section-promo-2 {
+  display: flex;
+  padding-top: 86px; //отступ от линии
+  margin-top: 120px; // отступ от видео
+  border-top: 1px solid #e2e2e2; //линия
+  text-align: center; //расположение текста по центру
+
+  .description-item + .description-item {
+    margin-left: 40px; // отступ между элементами
+  }
+}
+// === / promo ===
+
+// === founder ===
+.section-founder {
+  background-color: #f6fafd;
+  padding-top: 34px;
+
+  .section-inner {
+    display: flex;
+    padding-left: 100px;
+  }
+
+  &__img {
+    align-self: flex-end;
+  }
+  &__content {
+    align-self: center;
+    padding-left: 50px;
+    width: 550px;
+
+    &-text {
+      @include font-lato;
+
+      font-size: 24px;
+      line-height: 40px;
+      padding-bottom: 25px;
+      color: #414141;
+    }
+    &-name {
+      font-size: 24px;
+      line-height: 29px;
+      font-weight: bold;
+    }
+    &-post {
+      font-size: 20px;
+      line-height: 24px;
+    }
+  }
+}
+// === / founder ===
+
+// === plans ===
+.sections-plans {
+  @include font-lato;
+
+  padding-top: 120px;
+  padding-bottom: 120px;
+  text-align: center;
+
+  &_title {
+    font-size: 36px;
+    line-height: 51px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 120px;
+  }
+
+  &_subtitle {
+    font-size: 16px;
+    line-height: 28px;
+    font-weight: 300;
+    width: 50%;
+    margin-bottom: 0 auto 110px; //дистанция от списка до подзаголовка и расположение в две строки
+    color: #6c6c6c;
+    text-align: center;
+    margin-left: 305px;
+  }
+
+  &_list {
+    display: flex;
+    justify-content: center; //расположение двух блоков по центру
+
+    &-item {
+      flex-basis: 370px; //ширина контейнеров
+      padding: 60px 45px;
+      margin-top: 58px;
+      align-items: center;
+
+      &_title {
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: bold;
+        text-transform: uppercase;
+        margin-bottom: 26px;
+      }
+      &_price {
+        margin-bottom: 26px;
+
+        .prefix {
+          font-size: 72px;
+          line-height: 86px;
+          font-weight: bold;
+          color: #fe4fa7;
+        }
+        .postfix {
+          font-size: 14px;
+          line-height: 17px;
+          font-weight: bold;
+        }
+      }
+      &_description {
+        font-size: 16px;
+        line-height: 28px;
+        font-weight: 300;
+        margin-bottom: 40px;
+        color: #6c6c6c;
+      }
+
+      &.active {
+        background-color: #f6fafd;
+      }
+    }
+  }
+}
+// === / plans ===
+
+// === free ===
+.section-free {
+  text-align: center;
+  color: white;
+  background: linear-gradient(to right, #fe985b, #fe4fa7);
+  padding-top: 120px;
+  padding-bottom: 120px;
+
+  &_title {
+    font-size: 66px;
+    line-height: 60px;
+    font-weight: bold;
+    margin-bottom: 26px;
+  }
+
+  &_description {
+    @include font-monstserrat;
+
+    font-size: 20px;
+    line-height: 30px;
+    margin-bottom: 40px;
+    width: 50%;
+    margin: 0 auto 40px;
+  }
+}
+// === / free ===
+
+// === footer ===
+.section-footer {
+  padding-top: 80px;
+  padding-bottom: 80px;
+
+  &__logo {
+    font-size: 24px;
+    line-height: 29px;
+    font-weight: bold;
+    text-align: center;
+    color: #464646;
+    margin-bottom: 30px;
+  }
+  &__nav {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 75px;
+    padding: 0;
+    list-style: none;
+
+    li {
+      & + li {
+        margin-left: 60px; // сдвигаем соседний элемент
+      }
+
+      a {
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #464646;
+        text-decoration: none;
+
+        &.active {
+          color: #fe50a6;
+          }
+        }
+      }
+    }
+  }
+
+  .copyright_and_links {
+    @include font-monstserrat;
+
+    display: flex;
+    justify-content: space-between;
+    font-size: 14px;
+    line-height: 18px;
+    width: 60%;
+    margin: 0 auto;
+  }
+.helper-link {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+
+  li {
+    & + li {
+      margin-left: 20px; // сдвигаем соседний элемент
+    }
+
+    a {
+      color: #464646;
+      text-decoration: none;
+    }
+  }
+}
+// === / footer ===
